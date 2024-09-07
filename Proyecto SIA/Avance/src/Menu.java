@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -11,7 +12,16 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
+    public Agenda getAgenda() {
+        return agenda;
+    }
+
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
+    }
+
     public void iniciarMenu() {
+        identificarPersona();
 
         int opcion = 0;
         do {
@@ -25,6 +35,7 @@ public class Menu {
             System.out.println("║ 5. Mostrar eventos del dia fecha y por etiqueta      ║");
             System.out.println("║ 6. Eliminar Evento por ID                            ║");
             System.out.println("║ 7. Salir                                             ║");
+            System.out.println("║ 8. Enviar Recordatorio de Evento                     ║");
             System.out.println("╚══════════════════════════════════════════════════════╝");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -52,6 +63,9 @@ public class Menu {
                 case 7:
                     System.out.print("Saliendo del programa.....");
                     break;
+                case 8:
+                    consultarTiempoRestante();
+                    break;
                 default:
                     System.out.print("Ingrese una opción válida");
             }
@@ -72,11 +86,13 @@ public class Menu {
         String rut = scanner.nextLine();
 
         System.out.println("Ingrese su rol ¿Es usted empleado o jefe?");
-        String rol = scanner.nextLine();
+        String cargo = scanner.nextLine();
+
+        Persona persona = new Persona(nombre, edad, rut, cargo);
+
+        persona.mostrarSaludo(cargo);
 
     }
-
-
 
     public void agregarEvento() {
         System.out.println("Ingrese el nombre del evento: ");
@@ -85,19 +101,22 @@ public class Menu {
         System.out.println("Ingrese el descripcion del evento: ");
         String descripcion = scanner.nextLine();
 
-        System.out.println("Ingrese tipo de evento : Reunión ó Actividad: ");
+        System.out.println("Ingrese tipo de evento: Reunión o Actividad: ");
         String etiqueta = scanner.nextLine();
 
         System.out.println("Ingrese la hora del evento en formato 24 horas (00:00): ");
         String horaEvento = scanner.nextLine();
 
-        Evento evento = new Evento(nombre, descripcion, etiqueta, horaEvento);
+        System.out.println("Ingrese la fecha del evento: 'Formato YYYY-MM-DD': ");
+        String fechaEvento = scanner.nextLine();
 
-        System.out.println("Ingrese fecha del evento: 'Formato YYYY-MM-DD': ");
-        String clave = scanner.nextLine();
-        agenda.agregarEvento(clave, evento);
-        System.out.println("Evento agregado a Agenda! Con ID: " + evento.getIdEvento());
+        // Ahora incluimos la fecha en el constructor del Evento
+        Evento evento = new Evento(nombre, descripcion, etiqueta, horaEvento, fechaEvento);
+
+        agenda.agregarEvento(fechaEvento, evento);  // La fecha se pasa tanto a Agenda como a Evento
+        System.out.println("Evento agregado a la agenda con ID: " + evento.getIdEvento());
     }
+
 
     public void mostrarEventos() //por fecha
     {
@@ -134,6 +153,37 @@ public class Menu {
         agenda.mostrarTodosLosEventos(etiqueta);
     }
 
+    public void consultarTiempoRestante() {
+        System.out.println("Ingrese la fecha del evento (Formato YYYY-MM-DD): ");
+        String fecha = scanner.nextLine();
+        System.out.println("Ingrese el ID del evento para consultar el tiempo restante: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // Consumir el salto de línea
 
+        ArrayList<Evento> eventosEnDia = agenda.getEventos().get(LocalDate.parse(fecha));
+        if (eventosEnDia != null) {
+            for (Evento evento : eventosEnDia) {
+                if (evento.getIdEvento() == id) {
+                    Notificacion notificacion = new Notificacion();
+
+                    System.out.println("¿Desea ver el tiempo restante completo (1) o solo en días (2)?");
+                    int opcion = scanner.nextInt();
+                    scanner.nextLine();  // Consumir el salto de línea
+
+                    if (opcion == 1) {
+                        notificacion.consultarTiempoRestante(evento);  // Método original
+                    } else if (opcion == 2) {
+                        notificacion.consultarTiempoRestante(evento, true);  // Método sobrecargado (solo días)
+                    } else {
+                        System.out.println("Opción inválida.");
+                    }
+                    return;
+                }
+            }
+            System.out.println("No se encontró un evento con el ID proporcionado.");
+        } else {
+            System.out.println("No hay eventos en la fecha indicada.");
+        }
+    }
 
 }

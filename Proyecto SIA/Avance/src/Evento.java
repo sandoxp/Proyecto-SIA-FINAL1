@@ -3,18 +3,24 @@ public class Evento {
     private String descripcionEvento;
     private String etiqueta;
     private String horaEvento;
+    private String fechaEvento;  // Nueva propiedad para almacenar la fecha del evento
     private static int contador = 0;
     private int idEvento;
 
     public Evento() {
     }
 
-    public Evento(String nombreEvento, String descripcionEvento, String etiqueta, String horaEvento) {
+    public Evento(String nombreEvento, String descripcionEvento, String etiqueta, String horaEvento, String fechaEvento) {
         this.idEvento = ++contador;
         this.nombreEvento = nombreEvento;
         this.descripcionEvento = descripcionEvento;
         this.etiqueta = etiqueta;
         this.horaEvento = horaEvento;
+        this.fechaEvento = fechaEvento;  // Asignar la fecha del evento
+    }
+
+    public String getFechaEvento() {
+        return fechaEvento;
     }
 
     public String getNombreEvento() {
