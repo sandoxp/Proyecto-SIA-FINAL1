@@ -34,8 +34,8 @@ public class Menu {
             System.out.println("║ 4. Mostrar todos los eventos por etiqueta            ║");
             System.out.println("║ 5. Mostrar eventos del dia fecha y por etiqueta      ║");
             System.out.println("║ 6. Eliminar Evento por ID                            ║");
-            System.out.println("║ 7. Salir                                             ║");
-            System.out.println("║ 8. Enviar Recordatorio de Evento                     ║");
+            System.out.println("║ 7. Consultar cuánto falta para llegada de Evento     ║");
+            System.out.println("║ 8. Salir del programa                                ║");
             System.out.println("╚══════════════════════════════════════════════════════╝");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -61,15 +61,15 @@ public class Menu {
                     eliminarEvento();
                     break;
                 case 7:
-                    System.out.print("Saliendo del programa.....");
+                    consultarLlegadaEvento();
                     break;
                 case 8:
-                    consultarTiempoRestante();
+                    System.out.print("Saliendo del programa.....");
                     break;
                 default:
                     System.out.print("Ingrese una opción válida");
             }
-        } while (opcion != 7);
+        } while (opcion != 8);
 
     }
 
@@ -110,7 +110,6 @@ public class Menu {
         System.out.println("Ingrese la fecha del evento: 'Formato YYYY-MM-DD': ");
         String fechaEvento = scanner.nextLine();
 
-        // Ahora incluimos la fecha en el constructor del Evento
         Evento evento = new Evento(nombre, descripcion, etiqueta, horaEvento, fechaEvento);
 
         agenda.agregarEvento(fechaEvento, evento);  // La fecha se pasa tanto a Agenda como a Evento
@@ -153,12 +152,12 @@ public class Menu {
         agenda.mostrarTodosLosEventos(etiqueta);
     }
 
-    public void consultarTiempoRestante() {
+    public void consultarLlegadaEvento() {
         System.out.println("Ingrese la fecha del evento (Formato YYYY-MM-DD): ");
         String fecha = scanner.nextLine();
         System.out.println("Ingrese el ID del evento para consultar el tiempo restante: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea
+        scanner.nextLine();
 
         ArrayList<Evento> eventosEnDia = agenda.getEventos().get(LocalDate.parse(fecha));
         if (eventosEnDia != null) {
@@ -168,7 +167,7 @@ public class Menu {
 
                     System.out.println("¿Desea ver el tiempo restante completo (1) o solo en días (2)?");
                     int opcion = scanner.nextInt();
-                    scanner.nextLine();  // Consumir el salto de línea
+                    scanner.nextLine();
 
                     if (opcion == 1) {
                         notificacion.consultarTiempoRestante(evento);  // Método original

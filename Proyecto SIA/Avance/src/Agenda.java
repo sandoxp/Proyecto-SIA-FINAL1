@@ -6,7 +6,6 @@ public class Agenda {
     private String nombreAgenda;
     private TreeMap<LocalDate, ArrayList<Evento>> eventos;
 
-    //Constructores
     public Agenda(String nombreAgenda) {
         this.nombreAgenda = nombreAgenda;
         this.eventos = new TreeMap<>();
@@ -23,7 +22,6 @@ public class Agenda {
         this.eventos = eventos;
     }
 
-    //Método para agregar evento a un arrayList dentro de un HashMap.
     public void agregarEvento(String fecha, Evento evento) {
         LocalDate dia = LocalDate.parse(fecha);  //'Casting'
         //
@@ -43,13 +41,10 @@ public class Agenda {
             // Ordenar eventos por hora (String)
             eventosEnDia.sort((e1, e2) -> e1.getHoraEvento().compareTo(e2.getHoraEvento())); // Comparar como String
 
-
-            // Imprimir encabezado
             System.out.println("╔═════════════╦═════════════════════════════╦════════════════════════════════╦═════════════╗");
             System.out.println("║    HORA     ║        NOMBRE               ║         DESCRIPCIÓN            ║   ETIQUETA  ║");
             System.out.println("╠═════════════╬═════════════════════════════╬════════════════════════════════╬═════════════╣");
 
-            // Imprimir eventos con línea separadora entre ellos
             for (Evento evento : eventosEnDia) {
                 String descripcionCorta = evento.getDescripcionEvento();
                 if (descripcionCorta.length() > 30) {
@@ -62,7 +57,6 @@ public class Agenda {
                         descripcionCorta,
                         evento.getEtiqueta());
 
-                // Añadir línea separadora entre eventos
                 System.out.println("╠═════════════╬═════════════════════════════╬════════════════════════════════╬═════════════╣");
             }
 
@@ -70,7 +64,6 @@ public class Agenda {
         }
     }
 
-    //Mostrar evento por fecha y etiqueta (Sobrecarga de metodo)
     public void mostrarEventos(String fecha, String etiqueta) {
         LocalDate dia = LocalDate.parse(fecha);
         ArrayList<Evento> eventosEnDia = eventos.getOrDefault(dia, new ArrayList<>());
@@ -120,7 +113,6 @@ public class Agenda {
     }
 
 
-    // Este es mostrar ParaTreeMap y ya viene ordenado
     public void mostrarTodosLosEventos() {
         if (eventos.isEmpty()) {
             System.out.println("No hay eventos en la agenda.");
@@ -140,7 +132,6 @@ public class Agenda {
         }
     }
 
-    // Este es el mostrareventos etiquetas que funciona
     public void mostrarTodosLosEventos(String etiqueta) {
         boolean encontrado = false;
         if (eventos.isEmpty()) {
@@ -171,19 +162,6 @@ public class Agenda {
         }
     }
 
-////Este es el eliminarEventos
-//    public void eliminarEvento(String fecha, int id) {
-//
-//        LocalDate dia = LocalDate.parse(fecha);
-//        if (!eventos.containsKey(dia)) {
-//            System.out.println("No hay eventos en esta fecha: " + fecha);
-//        } else{
-//            this.eventos.get(dia).remove(id-1);
-//            System.out.println("Evento con id " + id + " eliminado.");
-//
-//        }
-//    }
-//}
 
     public void eliminarEvento(String fecha, int id) {
         LocalDate dia = LocalDate.parse(fecha);  // Convertir la fecha a LocalDate
@@ -209,24 +187,5 @@ public class Agenda {
             }
         }
     }
-
-
-//    public void eliminarEvento(String fecha, int id) {
-//        LocalDate dia = LocalDate.parse(fecha);  // Convertir la fecha a LocalDate
-//        if (!eventos.containsKey(dia)) {
-//            System.out.println("No hay eventos en esta fecha: " + fecha);
-//        } else {
-//            ArrayList<Evento> eventosEnDia = this.eventos.get(dia);
-//
-//            // Intentar eliminar el evento con el ID proporcionado usando removeIf
-//            boolean eliminado = eventosEnDia.removeIf(evento -> evento.getIdEvento() == id);
-//
-//            if (eliminado) {
-//                System.out.println("Evento con ID " + id + " eliminado.");
-//            } else {
-//                System.out.println("No se encontró un evento con ID " + id + " en la fecha " + fecha + ".");
-//            }
-//        }
-//    }
 
 }

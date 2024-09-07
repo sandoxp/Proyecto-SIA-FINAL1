@@ -3,7 +3,7 @@ public class Evento {
     private String descripcionEvento;
     private String etiqueta;
     private String horaEvento;
-    private String fechaEvento;  // Nueva propiedad para almacenar la fecha del evento
+    private String fechaEvento;
     private static int contador = 0;
     private int idEvento;
 
@@ -16,7 +16,7 @@ public class Evento {
         this.descripcionEvento = descripcionEvento;
         this.etiqueta = etiqueta;
         this.horaEvento = horaEvento;
-        this.fechaEvento = fechaEvento;  // Asignar la fecha del evento
+        this.fechaEvento = fechaEvento;
     }
 
     public String getFechaEvento() {
@@ -58,10 +58,10 @@ public class Evento {
     @Override
     public String toString() {
         return "Evento{" +
-                "nombre='" + nombreEvento + '\'' +
-                ", descripcion='" + descripcionEvento + '\'' +
-                ", etiqueta='" + etiqueta + '\'' +
-                ", hora='" + horaEvento + '\'' +
+                "Nombre evento='" + nombreEvento + '\'' +
+                ", Descripción='" + descripcionEvento + '\'' +
+                ", Etiqueta='" + etiqueta + '\'' +
+                ", Hora del evento='" + horaEvento + '\'' +
                 ", ID Evento ='" + idEvento + '\'' +
                 '}';
     }

@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 public class Notificacion {
 
-    // Metodo original: Calcula días, horas y minutos restantes
     public void consultarTiempoRestante(Evento evento) {
         LocalDate fechaEvento = LocalDate.parse(evento.getFechaEvento());
         LocalTime horaEvento = LocalTime.parse(evento.getHoraEvento());
@@ -23,8 +22,7 @@ public class Notificacion {
             System.out.println("El evento '" + evento.getNombreEvento() + "' ya ha ocurrido.");
         }
     }
-
-    // Sobrecarga: Calcula solo los días restantes
+    
     public void consultarTiempoRestante(Evento evento, boolean soloDias) {
         LocalDate fechaEvento = LocalDate.parse(evento.getFechaEvento());
         LocalDateTime fechaHoraActual = LocalDateTime.now();

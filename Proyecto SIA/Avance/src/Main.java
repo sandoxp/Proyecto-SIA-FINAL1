@@ -14,9 +14,9 @@ public class Main {
 
 
         //Agregar eventos a nuevaAgenda utilizando metodo agregarEvento();
-        nuevaAgenda.agregarEvento("2024-01-01", evento1);
-        nuevaAgenda.agregarEvento("2024-01-01", evento2);
-        nuevaAgenda.agregarEvento("2024-03-11", evento3);
+        nuevaAgenda.agregarEvento("2024-10-01", evento1);
+        nuevaAgenda.agregarEvento("2024-10-01", evento2);
+        nuevaAgenda.agregarEvento("2024-11-11", evento3);
         nuevaAgenda.agregarEvento("2024-08-29", evento4);
         nuevaAgenda.agregarEvento("2024-09-21", evento5);
 
