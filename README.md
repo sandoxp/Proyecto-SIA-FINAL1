@@ -9,6 +9,11 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión de eventos 
 
 1. Descargar este repositorio
 2. Abrir la carpeta "Proyecto SIA", no la carpeta "Proyecto-SIA-FINAL1" completa
+3. En IDE abrir las carpetas en el siguiente orden:
+       - Proyecto-SIA-FINAL1
+       - Proyecto SIA
+       - Avance
+       - src
 
 
 # 👥 Integrantes
