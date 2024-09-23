@@ -1,14 +1,23 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+
+
 
 public class Menu {
 
     private Scanner scanner;
     private Agenda agenda;
+    private String archivoCSV;
 
-    public Menu(Agenda agenda) {
+
+    public Menu(Agenda agenda, String archivoCSV) {
         this.agenda = agenda;
+        this.archivoCSV = archivoCSV;
         this.scanner = new Scanner(System.in);
     }
 
@@ -35,7 +44,8 @@ public class Menu {
             System.out.println("║ 5. Mostrar eventos del dia fecha y por etiqueta      ║");
             System.out.println("║ 6. Eliminar Evento por ID                            ║");
             System.out.println("║ 7. Consultar cuánto falta para llegada de Evento     ║");
-            System.out.println("║ 8. Salir del programa                                ║");
+            System.out.println("║ 8. Modificar evento                                  ║");
+            System.out.println("║ 9. Salir del programa                                ║");
             System.out.println("╚══════════════════════════════════════════════════════╝");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -64,14 +74,17 @@ public class Menu {
                     consultarLlegadaEvento();
                     break;
                 case 8:
+                    modificarEvento();  // Aquí se llama al método modificarEvento
+                    break;
+                case 9:
                     System.out.print("Saliendo del programa.....");
                     break;
                 default:
                     System.out.print("Ingrese una opción válida");
             }
-        } while (opcion != 8);
-
+        } while (opcion != 9);  // Cambia el valor de 8 a 9 para salir del programa con la opción correcta
     }
+
 
     public void identificarPersona(){
 
@@ -113,6 +126,8 @@ public class Menu {
         Evento evento = new Evento(nombre, descripcion, etiqueta, horaEvento, fechaEvento);
 
         agenda.agregarEvento(fechaEvento, evento);  // La fecha se pasa tanto a Agenda como a Evento
+
+        agenda.guardarEventosCSV(archivoCSV);
         System.out.println("Evento agregado a la agenda con ID: " + evento.getIdEvento());
     }
 
@@ -140,6 +155,17 @@ public class Menu {
         int id = scanner.nextInt();
         scanner.nextLine();
         this.agenda.eliminarEvento(fecha, id);
+
+        agenda.guardarEventosCSV(archivoCSV);
+    }
+
+    public void modificarEvento(){
+        System.out.println("Ingrese fecha para buscar evento a editar: ");
+        String fecha = scanner.nextLine();
+        System.out.println("Ingrese id de evento a editar: ");
+        int id = scanner.nextInt();
+        this.agenda.modificarEvento(fecha,id);
+        agenda.guardarEventosCSV(archivoCSV);
     }
 
     public void mostrarTodosLosEventos() {

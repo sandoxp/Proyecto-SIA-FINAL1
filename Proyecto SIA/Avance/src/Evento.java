@@ -53,7 +53,18 @@ public class Evento {
         return contador;
     }
 
+    public static void setContador(int contador) {
+        Evento.contador = contador;
+    }
     public int getIdEvento() {return idEvento;}
+
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
+        if (idEvento > contador) {
+            contador = idEvento;
+        }
+    }
+
 
     @Override
     public String toString() {
