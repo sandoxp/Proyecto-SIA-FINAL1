@@ -4,6 +4,7 @@ public class Main {
         //Creación de agenda.
         Agenda nuevaAgenda = new Agenda("Agenda Empresa");
 
+
 //        //Creacion de eventos
 //        Evento evento1 = new Evento("Capacitación en Seguridad", "Sesión de capacitación en normas de seguridad laboral", "Actividad", "11:30", "2024-01-01");
 //        Evento evento2 = new Evento("Reunión de Estrategia", "Discusión sobre las estrategias de ventas para el próximo trimestre", "Reunión", "09:00", "2024-01-01");

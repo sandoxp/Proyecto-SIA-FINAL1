@@ -5,9 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
-
-
 public class Menu {
 
     private Scanner scanner;
@@ -45,7 +42,8 @@ public class Menu {
             System.out.println("║ 6. Eliminar Evento por ID                            ║");
             System.out.println("║ 7. Consultar cuánto falta para llegada de Evento     ║");
             System.out.println("║ 8. Modificar evento                                  ║");
-            System.out.println("║ 9. Salir del programa                                ║");
+            System.out.println("║ 9. Mostrar eventos de la semana                      ║");
+            System.out.println("║ 10. Salir del programa                                ║");
             System.out.println("╚══════════════════════════════════════════════════════╝");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -77,12 +75,15 @@ public class Menu {
                     modificarEvento();  // Aquí se llama al método modificarEvento
                     break;
                 case 9:
+                    mostrarEventosDeLaSemana();  // LLAMADA A NUEVO MÉTODO
+                    break;
+                case 10:
                     System.out.print("Saliendo del programa.....");
                     break;
                 default:
                     System.out.print("Ingrese una opción válida");
             }
-        } while (opcion != 9);  // Cambia el valor de 8 a 9 para salir del programa con la opción correcta
+        } while (opcion != 10);  // Cambia el valor de 8 a 9 para salir del programa con la opción correcta
     }
 
 
@@ -147,6 +148,19 @@ public class Menu {
         String etiqueta = scanner.nextLine();
         this.agenda.mostrarEventos(fecha, etiqueta);
     }
+
+    public void mostrarEventosDeLaSemana() {
+        System.out.print("Ingrese la fecha (Formato YYYY-MM-DD) para mostrar los eventos de la semana: ");
+        String fecha = scanner.nextLine();
+
+        AgenditaSemanal agenditaSemanal = new AgenditaSemanal("Agenda Semanal");
+        agenditaSemanal.eventos = agenda.eventos;  // Compartir los eventos de la agenda
+        agenditaSemanal.mostrarEventos(fecha);  // Llama al método sobrescrito
+    }
+
+
+
+
 
     public void eliminarEvento() {
         System.out.println("Ingrese fecha para buscar evento a eliminar: ");

@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Agenda {
     private String nombreAgenda;
-    private TreeMap<LocalDate, ArrayList<Evento>> eventos;
+    protected TreeMap<LocalDate, ArrayList<Evento>> eventos;
     private Scanner scanner;
 
     public Agenda(String nombreAgenda) {
