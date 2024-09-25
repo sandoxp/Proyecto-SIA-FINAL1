@@ -12,6 +12,7 @@ public class Main {
 //        Evento evento4 = new Evento("Presentación de Resultados", "Presentación de resultados financieros a la gerencia", "Reunión", "16:00", "2024-08-29");
 //        Evento evento5 = new Evento("Evento Corporativo", "Celebración anual de la empresa con todos los empleados", "Actividad", "19:00", "2024-09-21");
 //
+
 //
 //
 //        //Agregar eventos a nuevaAgenda utilizando metodo agregarEvento();
@@ -26,7 +27,6 @@ public class Main {
         //Menú
         Menu menu = new Menu(nuevaAgenda,archivoCSV);
         menu.iniciarMenu();
-
         nuevaAgenda.guardarEventosCSV(archivoCSV);
     }
 }

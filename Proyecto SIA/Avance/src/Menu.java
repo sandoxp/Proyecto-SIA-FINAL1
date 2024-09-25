@@ -43,7 +43,8 @@ public class Menu {
             System.out.println("║ 7. Consultar cuánto falta para llegada de Evento     ║");
             System.out.println("║ 8. Modificar evento                                  ║");
             System.out.println("║ 9. Mostrar eventos de la semana                      ║");
-            System.out.println("║ 10. Salir del programa                                ║");
+            System.out.println("║ 10. Mostrar eventos del mes                          ║");
+            System.out.println("║ 11. Salir del programa                               ║");
             System.out.println("╚══════════════════════════════════════════════════════╝");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -78,12 +79,15 @@ public class Menu {
                     mostrarEventosDeLaSemana();  // LLAMADA A NUEVO MÉTODO
                     break;
                 case 10:
+                    mostrarEventosDelMes();  // LLAMADA A NUEVO MÉTODO
+                    break;
+                case 11:
                     System.out.print("Saliendo del programa.....");
                     break;
                 default:
                     System.out.print("Ingrese una opción válida");
             }
-        } while (opcion != 10);  // Cambia el valor de 8 a 9 para salir del programa con la opción correcta
+        } while (opcion != 11);  // Cambia el valor de 8 a 9 para salir del programa con la opción correcta
     }
 
 
@@ -157,6 +161,16 @@ public class Menu {
         agenditaSemanal.eventos = agenda.eventos;  // Compartir los eventos de la agenda
         agenditaSemanal.mostrarEventos(fecha);  // Llama al método sobrescrito
     }
+
+    public void mostrarEventosDelMes() {
+        System.out.print("Ingrese la fecha (Formato YYYY-MM-DD) para mostrar los eventos del mes: ");
+        String fecha = scanner.nextLine();
+
+        AgenditaMensual agenditaMensual = new AgenditaMensual("Agenda Mensual");
+        agenditaMensual.eventos = agenda.eventos;  // Compartir los eventos de la agenda
+        agenditaMensual.mostrarEventos(fecha);  // Llama al método sobrescrito
+    }
+
 
 
 
