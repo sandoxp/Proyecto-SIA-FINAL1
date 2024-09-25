@@ -113,28 +113,56 @@ public class Menu {
     }
 
     public void agregarEvento() {
-        System.out.println("Ingrese el nombre del evento: ");
-        String nombre = scanner.nextLine();
+        try {
+            System.out.println("Ingrese el nombre del evento: ");
+            String nombre = scanner.nextLine();
 
-        System.out.println("Ingrese el descripcion del evento: ");
-        String descripcion = scanner.nextLine();
+            System.out.println("Ingrese la descripción del evento: ");
+            String descripcion = scanner.nextLine();
 
-        System.out.println("Ingrese tipo de evento: Reunión o Actividad: ");
-        String etiqueta = scanner.nextLine();
+            System.out.println("Ingrese tipo de evento: Reunión o Actividad: ");
+            String etiqueta = scanner.nextLine();
 
-        System.out.println("Ingrese la hora del evento en formato 24 horas (00:00): ");
-        String horaEvento = scanner.nextLine();
+            System.out.println("Ingrese la hora del evento en formato 24 horas (00:00): ");
+            String horaEvento = scanner.nextLine();
+            validarHora(horaEvento);
 
-        System.out.println("Ingrese la fecha del evento: 'Formato YYYY-MM-DD': ");
-        String fechaEvento = scanner.nextLine();
+            System.out.println("Ingrese la fecha del evento: 'Formato YYYY-MM-DD': ");
+            String fechaEvento = scanner.nextLine();
 
-        Evento evento = new Evento(nombre, descripcion, etiqueta, horaEvento, fechaEvento);
 
-        agenda.agregarEvento(fechaEvento, evento);  // La fecha se pasa tanto a Agenda como a Evento
+            // Verificar formato y validez de la fecha
+            LocalDate fecha = LocalDate.parse(fechaEvento);
+            if (fecha.isBefore(LocalDate.now())) {
+                throw new FechaInvalidaException("La fecha no puede ser anterior a hoy.");
+            }
 
-        agenda.guardarEventosCSV(archivoCSV);
-        System.out.println("Evento agregado a la agenda con ID: " + evento.getIdEvento());
+            // Crear y agregar el evento
+            Evento evento = new Evento(nombre, descripcion, etiqueta, horaEvento, fechaEvento);
+            agenda.agregarEvento(fechaEvento, evento);
+
+            agenda.guardarEventosCSV(archivoCSV);
+            System.out.println("Evento agregado a la agenda con ID: " + evento.getIdEvento());
+
+        } catch (DateTimeParseException e) {
+            System.out.println("Error: Formato de fecha incorrecto. Use el formato YYYY-MM-DD.");
+        } catch (FechaInvalidaException | HoraInvalidaException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
+
+    private void validarHora(String hora) throws HoraInvalidaException {
+        try {
+            // Intentar parsear la hora
+            LocalTime parsedHora = LocalTime.parse(hora);
+
+        } catch (DateTimeParseException e) {
+            // Si el formato de la hora es incorrecto, lanzar una excepción.
+            throw new HoraInvalidaException("Formato de hora incorrecto. Use el formato HH:mm (ej. 14:30) y en un rango correcto (ej. 00:00 - 23:59)");
+        }
+    }
+
+
 
 
     public void mostrarEventos() //por fecha

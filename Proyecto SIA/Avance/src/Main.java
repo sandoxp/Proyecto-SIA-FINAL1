@@ -20,7 +20,7 @@ public class Main {
 //        nuevaAgenda.agregarEvento("2024-10-01", evento2);
 //        nuevaAgenda.agregarEvento("2024-11-11", evento3);
 //        nuevaAgenda.agregarEvento("2024-08-29", evento4);
-//        nuevaAgenda.agregarEvento("2024-09-21", evento5);||
+//        nuevaAgenda.agregarEvento("2024-09-21", evento5);
         
         String archivoCSV = "Avance/DatosGenerados.csv";
         nuevaAgenda.cargarEventosCSV(archivoCSV);
