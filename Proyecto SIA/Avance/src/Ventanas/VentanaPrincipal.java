@@ -1,5 +1,7 @@
 package Ventanas;
 
+import Avance.Agenda;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,13 +17,16 @@ public class VentanaPrincipal {
     private JPanel panelContenedor; // Panel que contiene todas las tarjetas
     private CardLayout cardLayout; // CardLayout para cambiar entre tarjetas
 
-    public VentanaPrincipal() {
+    private Agenda agenda;
+
+    public VentanaPrincipal(Agenda agenda) {
         // Inicializar el CardLayout y el panel contenedor
         cardLayout = new CardLayout();
         panelContenedor = new JPanel(cardLayout);
 
+
         // Crear instancia de VentanaOpcionesMostrar
-        VentanaOpcionesMostrar opcionesMostrar = new VentanaOpcionesMostrar();
+        VentanaOpcionesMostrar opcionesMostrar = new VentanaOpcionesMostrar(agenda);
 
         // Crear placeholders para cada funcionalidad
         JPanel panelRegistrarEvento = new JPanel();
@@ -90,13 +95,18 @@ public class VentanaPrincipal {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Ventana Principal");
+        // Instancia de la agenda
+        Agenda miAgenda = new Agenda("Mi Agenda");
+        String archivoCSV = "Avance/DatosGenerados.csv";
+        miAgenda.cargarEventosCSV(archivoCSV);
 
-        VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-        frame.setContentPane(ventanaPrincipal.getPanelContenedor());
+        // Crear la ventana principal y pasarle la agenda
+        JFrame frame = new JFrame("VentanaPrincipal");
+        frame.setContentPane(new VentanaPrincipal(miAgenda).getPanelContenedor());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setLocationRelativeTo(null); // Centrar la ventana
         frame.setVisible(true);
     }
+
+
 }

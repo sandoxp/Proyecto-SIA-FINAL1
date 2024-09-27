@@ -1,8 +1,11 @@
 package Ventanas;
-
+import Avance.Agenda;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 
 public class VentanaOpcionesMostrar {
     private JButton visualizarTodosLosEventosButton;
@@ -13,12 +16,19 @@ public class VentanaOpcionesMostrar {
     private JButton visualizarEventosEnMesButton;
     private JButton visualizarEventosPorFechayEtiquetaButton;
 
-    public VentanaOpcionesMostrar() {
+    private VentanaMostrarTodo ventanaMostrarTodo;
+    private Agenda agenda; // Referencia a la agenda
+
+
+
+    public VentanaOpcionesMostrar(Agenda agenda) {
+        this.agenda = agenda;
         // Acción para visualizar todos los eventos
         visualizarTodosLosEventosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel1, "Visualizar todos los eventos.");
+                VentanaMostrarTodo v1 = new VentanaMostrarTodo(agenda);
+                v1.mostrarTablaEventos();
             }
         });
 
@@ -26,7 +36,7 @@ public class VentanaOpcionesMostrar {
         visualizarEventosPorFechaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel1, "Visualizar eventos por fecha.");
+
             }
         });
 
@@ -63,7 +73,10 @@ public class VentanaOpcionesMostrar {
         });
     }
 
+
     public JPanel getPanel() {
         return panel1;
     }
+
+
 }
