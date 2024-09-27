@@ -10,7 +10,7 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(String nombreEvento, String descripcionEvento, String etiqueta, String horaEvento, String fechaEvento) {
+    public Evento(String nombreEvento, String descripcionEvento, String etiqueta, String horaEvento, String fechaEvento)  {
         this.idEvento = ++contador;
         this.nombreEvento = nombreEvento;
         this.descripcionEvento = descripcionEvento;

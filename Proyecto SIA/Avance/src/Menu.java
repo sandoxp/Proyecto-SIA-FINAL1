@@ -162,9 +162,6 @@ public class Menu {
         }
     }
 
-
-
-
     public void mostrarEventos() //por fecha
     {
         System.out.print("Ingrese fecha  Formato YYYY-MM-DD para consultar eventos: ");
