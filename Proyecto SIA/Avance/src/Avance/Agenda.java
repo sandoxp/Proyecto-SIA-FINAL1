@@ -41,38 +41,28 @@ public class Agenda {
         eventos.get(dia).add(evento);
     }
 
-    public void mostrarEventos(String fecha) {
+    public ArrayList<Object[]> mostrarEventos(String fecha) {
         LocalDate dia = LocalDate.parse(fecha);
+        ArrayList<Object[]> eventosData = new ArrayList<>();
+
+        // Obtener los eventos del día
         ArrayList<Evento> eventosEnDia = eventos.getOrDefault(dia, new ArrayList<>());
 
-        if (eventosEnDia.isEmpty()) {
-            System.out.println("No hay eventos en esta fecha.");
-        } else {
-            // Ordenar eventos por hora (String)
-            eventosEnDia.sort((e1, e2) -> e1.getHoraEvento().compareTo(e2.getHoraEvento())); // Comparar como String
-
-            System.out.println("╔═════════════╦═════════════════════════════╦════════════════════════════════╦═════════════╗");
-            System.out.println("║    HORA     ║        NOMBRE               ║         DESCRIPCIÓN            ║   ETIQUETA  ║");
-            System.out.println("╠═════════════╬═════════════════════════════╬════════════════════════════════╬═════════════╣");
-
-            for (Evento evento : eventosEnDia) {
-                String descripcionCorta = evento.getDescripcionEvento();
-                if (descripcionCorta.length() > 30) {
-                    descripcionCorta = descripcionCorta.substring(0, 27) + "...";  // Limitar a 30 caracteres
-                }
-
-                System.out.printf("║ %11s ║ %-27s ║ %-28s ║ %-11s ║%n",
-                        evento.getHoraEvento(),
-                        evento.getNombreEvento(),
-                        descripcionCorta,
-                        evento.getEtiqueta());
-
-                System.out.println("╠═════════════╬═════════════════════════════╬════════════════════════════════╬═════════════╣");
-            }
-
-            System.out.println("╚═════════════╩═════════════════════════════╩════════════════════════════════╩═════════════╝");
+        // Si hay eventos, llenar la lista con sus datos
+        for (Evento evento : eventosEnDia) {
+            Object[] eventoData = {
+                    evento.getIdEvento(),
+                    evento.getNombreEvento(),
+                    evento.getDescripcionEvento(),
+                    evento.getEtiqueta(),
+                    evento.getHoraEvento()
+            };
+            eventosData.add(eventoData);
         }
+
+        return eventosData; // Retornar la lista de eventos como arreglos de objetos
     }
+
 
     public void mostrarEventos(String fecha, String etiqueta) {
         LocalDate dia = LocalDate.parse(fecha);
@@ -156,35 +146,39 @@ public class Agenda {
 
 
 
-    public void mostrarTodosLosEventos(String etiqueta) {
-        boolean encontrado = false;
+    public List<Object[]> mostrarTodosLosEventos(String etiqueta) {
+        List<Object[]> listaEventos = new ArrayList<>();
+
+        // Verificar si la agenda tiene eventos
         if (eventos.isEmpty()) {
-            System.out.println("No hay eventos en la agenda.");
-            return;
+            return listaEventos; // Retorna lista vacía si no hay eventos
         }
+
+        // Llenar la lista con los datos de los eventos que coincidan con la etiqueta
         for (Map.Entry<LocalDate, ArrayList<Evento>> entrada : eventos.entrySet()) {
             LocalDate dia = entrada.getKey();
             ArrayList<Evento> eventosEnDia = entrada.getValue();
 
             eventosEnDia.sort((e1, e2) -> e1.getHoraEvento().compareTo(e2.getHoraEvento()));
 
-            boolean hayEventosEnEsteDia = false;
             for (Evento evento : eventosEnDia) {
-                if (evento.getEtiqueta().equals(etiqueta)) {
-                    if (!hayEventosEnEsteDia) {
-                        System.out.println("Eventos en " + dia + ":");
-                        hayEventosEnEsteDia = true;
-                    }
-                    System.out.println(evento);
-                    encontrado = true;
+                if (evento.getEtiqueta().equalsIgnoreCase(etiqueta)) {
+                    Object[] data = {
+                            evento.getIdEvento(),
+                            evento.getNombreEvento(),
+                            evento.getDescripcionEvento(),
+                            evento.getEtiqueta(),
+                            evento.getHoraEvento(),
+                            dia.toString()
+                    };
+                    listaEventos.add(data);
                 }
             }
         }
 
-        if (!encontrado) {
-            System.out.println("No hay eventos con la etiqueta '" + etiqueta + "' en la agenda.");
-        }
+        return listaEventos; // Retorna la lista de eventos con la etiqueta especificada
     }
+
 
 
     public void eliminarEvento(String fecha, int id) {

@@ -10,9 +10,9 @@ public class AgenditaMensual extends Agenda {
     }
 
     @Override
-    public void mostrarEventos(String fecha) {
+    public ArrayList<Object[]> mostrarEventos(String fecha) {
         LocalDate dia = LocalDate.parse(fecha);
-
+        ArrayList<Object[]> listongo = new ArrayList<>();
         // Obtener el primer y último día del mes
         LocalDate primerDiaMes = dia.with(TemporalAdjusters.firstDayOfMonth());
         LocalDate ultimoDiaMes = dia.with(TemporalAdjusters.lastDayOfMonth());
@@ -33,5 +33,6 @@ public class AgenditaMensual extends Agenda {
                 System.out.println("No hay eventos para este día.");
             }
         }
+        return listongo;
     }
 }

@@ -36,7 +36,7 @@ public class VentanaOpcionesMostrar {
         visualizarEventosPorFechaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                VentanaPorFecha ventanaPorFecha = new VentanaPorFecha(agenda);
             }
         });
 
@@ -44,7 +44,8 @@ public class VentanaOpcionesMostrar {
         visualizarEventosPorEtiquetaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel1, "Visualizar eventos por etiqueta.");
+                // Crear e instanciar VentanaPorEtiqueta con la agenda actual
+                VentanaPorEtiqueta ventanaPorEtiqueta = new VentanaPorEtiqueta(agenda);
             }
         });
 
@@ -57,10 +58,18 @@ public class VentanaOpcionesMostrar {
         });
 
         // Acción para visualizar eventos en la semana
+        this.agenda = agenda;
+
+        // Acción para visualizar eventos de la semana
         visualizarEventosEnSemanaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel1, "Visualizar eventos en la semana.");
+                // Solicitar al usuario la fecha inicial para la semana
+                String fechaInicial = JOptionPane.showInputDialog(null, "Ingrese la fecha inicial de la semana (Formato YYYY-MM-DD):");
+
+                // Crear e inicializar VentanaSemanal
+                VentanaSemanal ventanaSemanal = new VentanaSemanal(agenda);
+                ventanaSemanal.mostrarTablaEventosSemana(fechaInicial);
             }
         });
 
