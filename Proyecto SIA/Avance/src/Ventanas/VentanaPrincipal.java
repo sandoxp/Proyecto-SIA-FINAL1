@@ -17,6 +17,7 @@ public class VentanaPrincipal {
     private JPanel panelContenedor; // Panel que contiene todas las tarjetas
     private CardLayout cardLayout; // CardLayout para cambiar entre tarjetas
 
+    private String archivoCSV = "Avance/DatosGenerados.csv"; // Ruta del archivo CSV
     private Agenda agenda;
 
     public VentanaPrincipal(Agenda agenda) {
@@ -49,6 +50,16 @@ public class VentanaPrincipal {
         panelContenedor.add(panelEliminarEvento, "PanelEliminarEvento");
         panelContenedor.add(panelVerTiempoRestante, "PanelVerTiempoRestante");
 
+        // Acción para abrir la ventana de registro de eventos
+        // Acción para abrir la ventana de registro de eventos
+        registrarEventoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Crear e instanciar VentanaRegistrarEvento con la agenda y el archivo CSV actual
+                new VentanaRegistrarEvento(agenda, archivoCSV);
+            }
+        });
+
         // Acción para cambiar a la vista de opciones para visualizar eventos
         visualizarEventoSButton.addActionListener(new ActionListener() {
             @Override
@@ -57,13 +68,6 @@ public class VentanaPrincipal {
             }
         });
 
-        // Acción para registrar un evento
-        registrarEventoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelContenedor, "PanelRegistrarEvento"); // Cambiar a la tarjeta de registrar evento
-            }
-        });
 
         // Acción para modificar un evento
         modificarEventoButton.addActionListener(new ActionListener() {
@@ -73,11 +77,12 @@ public class VentanaPrincipal {
             }
         });
 
-        // Acción para eliminar un evento
+        // Acción para abrir la ventana de eliminación de eventos
         eliminarEventoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelContenedor, "PanelEliminarEvento"); // Cambiar a la tarjeta de eliminar evento
+                // Crear e instanciar VentanaEliminarEvento con la agenda y el archivo CSV actual
+                new VentanaEliminarEvento(agenda, archivoCSV);
             }
         });
 

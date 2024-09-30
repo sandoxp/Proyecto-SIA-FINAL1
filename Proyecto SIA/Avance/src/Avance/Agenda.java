@@ -312,8 +312,10 @@ public class Agenda {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error al guardar los eventos en el archivo CSV.");
         }
     }
+
 
     public void cargarEventosCSV(String archivoCSV) {
         try (CSVReader reader = new CSVReader(new FileReader(archivoCSV))) {

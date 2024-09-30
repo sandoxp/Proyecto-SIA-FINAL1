@@ -23,6 +23,7 @@ public class VentanaOpcionesMostrar {
 
     public VentanaOpcionesMostrar(Agenda agenda) {
         this.agenda = agenda;
+
         // Acción para visualizar todos los eventos
         visualizarTodosLosEventosButton.addActionListener(new ActionListener() {
             @Override
@@ -53,23 +54,20 @@ public class VentanaOpcionesMostrar {
         visualizarEventosPorFechayEtiquetaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel1, "Visualizar eventos por fecha y etiqueta.");
+                VentanaFechaEtiqueta ventanaFechaEtiqueta = new VentanaFechaEtiqueta(agenda);
             }
         });
 
-        // Acción para visualizar eventos en la semana
-        this.agenda = agenda;
+
 
         // Acción para visualizar eventos de la semana
         visualizarEventosEnSemanaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Solicitar al usuario la fecha inicial para la semana
-                String fechaInicial = JOptionPane.showInputDialog(null, "Ingrese la fecha inicial de la semana (Formato YYYY-MM-DD):");
 
                 // Crear e inicializar VentanaSemanal
                 VentanaSemanal ventanaSemanal = new VentanaSemanal(agenda);
-                ventanaSemanal.mostrarTablaEventosSemana(fechaInicial);
+
             }
         });
 
@@ -77,7 +75,8 @@ public class VentanaOpcionesMostrar {
         visualizarEventosEnMesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel1, "Visualizar eventos en el mes.");
+                // Crear la ventana para mostrar eventos mensuales
+                VentanaMensual ventanaMensual = new VentanaMensual(agenda);
             }
         });
     }

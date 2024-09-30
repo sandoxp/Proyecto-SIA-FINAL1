@@ -2,6 +2,7 @@ package Avance;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.*;
 
 public class AgenditaMensual extends Agenda {
 
@@ -10,29 +11,30 @@ public class AgenditaMensual extends Agenda {
     }
 
     @Override
-    public ArrayList<Object[]> mostrarEventos(String fecha) {
-        LocalDate dia = LocalDate.parse(fecha);
-        ArrayList<Object[]> listongo = new ArrayList<>();
-        // Obtener el primer y último día del mes
-        LocalDate primerDiaMes = dia.with(TemporalAdjusters.firstDayOfMonth());
-        LocalDate ultimoDiaMes = dia.with(TemporalAdjusters.lastDayOfMonth());
+    public ArrayList<Object[]> mostrarEventos(String fechaInicial) {
+        ArrayList<Object[]> listaEventos = new ArrayList<>();
+        LocalDate diaInicial = LocalDate.parse(fechaInicial);
 
-        // Mostrar eventos desde el primer día hasta el último día del mes
-        System.out.println("Mostrando eventos del mes desde el " + primerDiaMes + " hasta el " + ultimoDiaMes + ":");
+        // Obtener el primer y último día del mes de la fecha dada
+        LocalDate primerDiaMes = diaInicial.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDate ultimoDiaMes = diaInicial.with(TemporalAdjusters.lastDayOfMonth());
 
-        for (LocalDate currentDay = primerDiaMes; !currentDay.isAfter(ultimoDiaMes); currentDay = currentDay.plusDays(1)) {
-            System.out.println("\nEventos para el día: " + currentDay);
-
-            // Comprobar si hay eventos en el día actual
-            if (eventos.containsKey(currentDay)) {
-                ArrayList<Evento> eventosDelDia = eventos.get(currentDay);
-                for (Evento evento : eventosDelDia) {
-                    System.out.println(evento);  // Imprimir los eventos del día
-                }
-            } else {
-                System.out.println("No hay eventos para este día.");
+        // Recorrer todos los días del mes
+        for (LocalDate dia = primerDiaMes; !dia.isAfter(ultimoDiaMes); dia = dia.plusDays(1)) {
+            // Obtener eventos del día actual
+            ArrayList<Evento> eventosEnDia = eventos.getOrDefault(dia, new ArrayList<>());
+            for (Evento evento : eventosEnDia) {
+                Object[] eventoData = {
+                        evento.getIdEvento(),
+                        evento.getNombreEvento(),
+                        evento.getDescripcionEvento(),
+                        evento.getEtiqueta(),
+                        evento.getHoraEvento(),
+                        dia.toString() // Agregar la fecha del evento
+                };
+                listaEventos.add(eventoData);
             }
         }
-        return listongo;
+        return listaEventos; // Retornar la lista de eventos del mes
     }
 }
