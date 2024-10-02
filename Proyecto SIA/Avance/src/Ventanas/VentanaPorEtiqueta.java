@@ -22,6 +22,7 @@ public class VentanaPorEtiqueta {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
+
         // Panel superior para seleccionar la etiqueta
         JPanel panelSuperior = new JPanel();
         JLabel labelEtiqueta = new JLabel("Seleccione la etiqueta:");

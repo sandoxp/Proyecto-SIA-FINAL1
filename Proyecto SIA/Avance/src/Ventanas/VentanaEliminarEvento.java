@@ -136,5 +136,6 @@ public class VentanaEliminarEvento {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
     }
 }

@@ -26,6 +26,7 @@ public class VentanaPrincipal {
         panelContenedor = new JPanel(cardLayout);
 
 
+
         // Crear instancia de VentanaOpcionesMostrar
         VentanaOpcionesMostrar opcionesMostrar = new VentanaOpcionesMostrar(agenda);
 
@@ -73,7 +74,8 @@ public class VentanaPrincipal {
         modificarEventoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelContenedor, "PanelModificarEvento"); // Cambiar a la tarjeta de modificar evento
+                // Instanciar la ventana para modificar eventos
+                new VentanaModificarEvento(agenda, archivoCSV);
             }
         });
 
@@ -90,7 +92,8 @@ public class VentanaPrincipal {
         verTiempoRestanteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelContenedor, "PanelVerTiempoRestante"); // Cambiar a la tarjeta de tiempo restante
+                // Instanciar la ventana para visualizar el tiempo restante
+                new VentanaVisualizarTiempoRestante(agenda);
             }
         });
     }
@@ -111,6 +114,7 @@ public class VentanaPrincipal {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
 
