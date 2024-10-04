@@ -7,9 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="opencsv-5.9" level="project" />
-    <orderEntry type="library" name="Extraer en esta misma carpeta" level="project" />
     <orderEntry type="library" name="jgoodies-common-1.8.1" level="project" />
     <orderEntry type="library" name="jgoodies-forms-1.8.0" level="project" />
+    <orderEntry type="library" name="commons-lang3-3.17.0" level="project" />
+    <orderEntry type="library" name="opencsv-5.9" level="project" />
   </component>
 </module>

@@ -1,5 +1,8 @@
 package Avance;
 import Avance.Agenda;
+import Ventanas.VentanaPrincipal;
+
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,10 +29,25 @@ public class Main {
 //        nuevaAgenda.agregarEvento("2024-09-21", evento5);
         
         String archivoCSV = "Avance/DatosGenerados.csv";
+        
         nuevaAgenda.cargarEventosCSV(archivoCSV);
         //Menú
-        Menu menu = new Menu(nuevaAgenda,archivoCSV);
-        menu.iniciarMenu();
+        //Menu menu = new Menu(nuevaAgenda,archivoCSV);
+        //menu.iniciarMenu();
+
         nuevaAgenda.guardarEventosCSV(archivoCSV);
+
+
+        // Crear la ventana principal y pasarle la agenda cargada
+        JFrame frame = new JFrame("Agenda - Ventana Principal");
+        frame.setContentPane(new VentanaPrincipal(nuevaAgenda).getPanelContenedor());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+
+        String rutaArchivo = "reporte.txt"; // Nombre y ruta donde se guardará el archivo .txt
+        GenerarReporte.generarReporte(rutaArchivo, nuevaAgenda);
     }
 }
