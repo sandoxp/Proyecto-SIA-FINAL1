@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Ventanas.VentanaOpcionesMostrar">
+  <grid id="27dc6" binding="panel1" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="471" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="d51d0" class="javax.swing.JButton" binding="visualizarTodosLosEventosButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Visualizar todos los eventos."/>
+        </properties>
+      </component>
+      <component id="d26da" class="javax.swing.JButton" binding="visualizarEventosPorFechaButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Visualizar eventos por fecha."/>
+        </properties>
+      </component>
+      <component id="58da6" class="javax.swing.JButton" binding="visualizarEventosPorEtiquetaButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Visualizar Eventos Por Etiqueta."/>
+        </properties>
+      </component>
+      <component id="ad4f5" class="javax.swing.JButton" binding="visualizarEventosPorFechayEtiquetaButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Visualizar Eventos Por Fecha y Etiqueta."/>
+        </properties>
+      </component>
+      <component id="f4943" class="javax.swing.JButton" binding="visualizarEventosEnSemanaButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Visualizar eventos en Semana."/>
+        </properties>
+      </component>
+      <component id="100fd" class="javax.swing.JButton" binding="visualizarEventosEnMesButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Visualizar Eventos en Mes."/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
