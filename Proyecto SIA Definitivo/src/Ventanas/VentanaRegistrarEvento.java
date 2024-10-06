@@ -1,13 +1,17 @@
-
 package Ventanas;
 
 import Clases.Agenda;
 import Clases.Evento;
+import Clases.FechaInvalidaException;
+import Clases.HoraInvalidaException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 public class VentanaRegistrarEvento {
     private Agenda agenda;
@@ -69,14 +73,25 @@ public class VentanaRegistrarEvento {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtener los datos ingresados
-                String nombre = campoNombre.getText();
-                String descripcion = campoDescripcion.getText();
+                String nombre = campoNombre.getText().trim();
+                String descripcion = campoDescripcion.getText().trim();
                 String etiqueta = (String) comboBoxEtiqueta.getSelectedItem();
-                String hora = campoHora.getText();
-                String fecha = campoFecha.getText();
+                String hora = campoHora.getText().trim();
+                String fecha = campoFecha.getText().trim();
 
-                // Validar y registrar el evento
                 try {
+                    // Verificar campos vacíos
+                    if (nombre.isEmpty() || descripcion.isEmpty() || hora.isEmpty() || fecha.isEmpty()) {
+                        JOptionPane.showMessageDialog(frame, "Todos los campos deben ser llenados.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return; // Detener el proceso si hay campos vacíos
+                    }
+
+                    // Validar la hora
+                    validarHora(hora);
+
+                    // Validar la fecha
+                    validarFecha(fecha);
+
                     // Crear y agregar evento a la agenda
                     Evento nuevoEvento = new Evento(nombre, descripcion, etiqueta, hora, fecha);
                     agenda.agregarEvento(fecha, nuevoEvento);
@@ -92,8 +107,14 @@ public class VentanaRegistrarEvento {
                     campoDescripcion.setText("");
                     campoHora.setText("");
                     campoFecha.setText("");
+                } catch (HoraInvalidaException ex) {
+                    // Manejar errores de hora inválida
+                    JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error de Hora", JOptionPane.ERROR_MESSAGE);
+                } catch (FechaInvalidaException ex) {
+                    // Manejar errores de fecha inválida
+                    JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error de Fecha", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
-                    // Manejar errores de formato o datos inválidos
+                    // Manejar otros errores generales
                     JOptionPane.showMessageDialog(frame, "Error al registrar el evento. Verifique los datos ingresados.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -103,5 +124,28 @@ public class VentanaRegistrarEvento {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    // Métodos de validación de hora y fecha
+    private void validarHora(String hora) throws HoraInvalidaException {
+        try {
+            // Intentar parsear la hora
+            LocalTime.parse(hora);
+        } catch (DateTimeParseException e) {
+            // Si el formato de la hora es incorrecto, lanzar una excepción personalizada.
+            throw new HoraInvalidaException("Formato de hora incorrecto. Use el formato HH:mm (ej. 14:30).");
+        }
+    }
+
+    private void validarFecha(String fecha) throws FechaInvalidaException {
+        try {
+            LocalDate parsedFecha = LocalDate.parse(fecha);
+            if (parsedFecha.isBefore(LocalDate.now())) {
+                throw new FechaInvalidaException("La fecha no puede ser anterior a hoy.");
+            }
+        } catch (DateTimeParseException e) {
+            // Si el formato de la fecha es incorrecto, lanzar una excepción personalizada.
+            throw new FechaInvalidaException("Formato de fecha incorrecto. Use el formato YYYY-MM-DD.");
+        }
     }
 }
