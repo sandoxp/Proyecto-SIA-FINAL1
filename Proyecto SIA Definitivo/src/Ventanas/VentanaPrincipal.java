@@ -52,7 +52,6 @@ public class VentanaPrincipal {
         panelContenedor.add(panelVerTiempoRestante, "PanelVerTiempoRestante");
 
         // Acción para abrir la ventana de registro de eventos
-        // Acción para abrir la ventana de registro de eventos
         registrarEventoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,7 +64,21 @@ public class VentanaPrincipal {
         visualizarEventosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelContenedor, "PanelOpciones"); // Cambiar a la tarjeta de opciones
+                // Crear una nueva ventana para las opciones de visualización
+                JFrame frame = new JFrame("Opciones de Visualización");
+
+                // Asegurarse de que solo cierre esta ventana y no la aplicación completa
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                // Crear una nueva instancia de VentanaOpcionesMostrar y agregarla al JFrame
+                VentanaOpcionesMostrar opcionesMostrar = new VentanaOpcionesMostrar(agenda);
+
+                frame.setContentPane(opcionesMostrar.getPanel());
+
+                // Configurar y mostrar la ventana
+                frame.pack();
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
             }
         });
 

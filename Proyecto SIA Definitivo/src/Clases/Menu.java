@@ -250,9 +250,9 @@ public class Menu {
                     scanner.nextLine();
 
                     if (opcion == 1) {
-                        notificacion.consultarTiempoRestante(evento);  // Método original
+                        notificacion.consultarTiempoRestante(evento);
                     } else if (opcion == 2) {
-                        notificacion.consultarTiempoRestante(evento, true);  // Método sobrecargado (solo días)
+                        notificacion.consultarTiempoRestante(evento, true);
                     } else {
                         System.out.println("Opción inválida.");
                     }

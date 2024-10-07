@@ -22,7 +22,6 @@ public class VentanaOpcionesMostrar {
         this.agenda = agenda;
 
         // Acción para visualizar todos los eventos
-
         visualizarTodosLosEventosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
