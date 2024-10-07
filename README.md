@@ -8,13 +8,8 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión de eventos 
 ### Instrucciones para Ejecutar el Proyecto
 
 1. Descargar este repositorio
-2. Abrir la carpeta "Proyecto SIA", no la carpeta "Proyecto-SIA-FINAL1" completa
-3. En IDE abrir las carpetas en el siguiente orden:
-       - Proyecto-SIA-FINAL1
-       - Proyecto SIA
-       - Avance
-       - src
-
+2. En el IDE Abrir la carpeta "Proyecto SIA DEFINITIVO".
+3. Ejecutar en src - Clases - MAIN
 
 # 👥 Integrantes
     Isidora Gárate
